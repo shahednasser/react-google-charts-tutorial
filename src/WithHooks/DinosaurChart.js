@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
-import GoogleContext from "./GoogleContext";
 
-function DinosaurChart () {
+function DinosaurChart ({google}) {
   const [chart, setChart] = useState(null);
-  const { google } = useContext(GoogleContext);
 
   useEffect(() => {
     if (google && !chart) {
@@ -44,6 +42,7 @@ function DinosaurChart () {
         legend: { position: 'none' },
       };
 
+      // Instantiate and draw our chart, passing in some options.
       const newChart = new google.visualization.Histogram(document.getElementById('dinosaurChart'));
       newChart.draw(data, options);
 

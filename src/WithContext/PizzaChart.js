@@ -26,7 +26,7 @@ function PizzaChart () {
                     'height':300};
 
       // Instantiate and draw our chart, passing in some options.
-      const newChart = new window.google.visualization.PieChart(document.getElementById('pizza_chart'));
+      const newChart = new window.google.visualization.PieChart(document.getElementById('pizzaChart'));
       newChart.draw(data, options);
 
       setChart(newChart);
@@ -36,7 +36,7 @@ function PizzaChart () {
   return (
     <>
       {!google && <Spinner />}
-      <div id="pizza_chart" className={!google ? 'd-none' : ''} />
+      <div id="pizzaChart" className={!google ? 'd-none' : ''} />
     </>
   )
 }

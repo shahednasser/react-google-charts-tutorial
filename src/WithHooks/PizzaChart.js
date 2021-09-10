@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
-import useGoogleCharts from "./useGoogleCharts";
 
-function PizzaChart () {
-  const loaded = useGoogleCharts();
+function PizzaChart ({google}) {
   const [chart, setChart] = useState(null);
 
   useEffect(() => {
-    if (loaded && !chart) {
+    if (google && !chart) {
       // Create the data table.
-      var data = new window.google.visualization.DataTable();
+      const data = new google.visualization.DataTable();
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
       data.addRows([
@@ -26,17 +24,17 @@ function PizzaChart () {
                     'height':300};
 
       // Instantiate and draw our chart, passing in some options.
-      const newChart = new window.google.visualization.PieChart(document.getElementById('pizza_chart'));
+      const newChart = new google.visualization.PieChart(document.getElementById('pizzaChart'));
       newChart.draw(data, options);
 
       setChart(newChart);
     }
-  }, [loaded, chart]);
+  }, [google, chart]);
 
   return (
     <>
-      {!loaded && <Spinner />}
-      <div id="pizza_chart" className={!loaded ? 'd-none' : ''} />
+      {!google && <Spinner />}
+      <div id="pizzaChart" className={!google ? 'd-none' : ''} />
     </>
   )
 }
